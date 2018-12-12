@@ -15,6 +15,7 @@ const Mutations = {
   
       return item;
     },
+
     updateItem(parent, args, ctx, info) {
       // first take a copy of the updates
       const updates = {...args };
@@ -30,6 +31,18 @@ const Mutations = {
       info
       );
     },
+
+    async deleteItem(parent, args, ctx, info){
+      const where = { id: args.id };
+      //1. find the item
+      const item = await ctx.db.query.item({ where }, `{ id title}`)
+      //2. check if they own the item or have the permissions
+      // TODO
+      //3. Delete it!
+      return ctx.db.mutation.deleteItem( {where }, info)
+    }
+
+
     // createDog(parent, args, ctx, info) {
     //   global.dogs = global.dogs || [];
     //   // create a dog
