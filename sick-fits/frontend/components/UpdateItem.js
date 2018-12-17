@@ -56,7 +56,6 @@ class UpdateItem extends Component {
         console.log('Updated!!');
       };
 
-
     render() {
         return (
           <Query
