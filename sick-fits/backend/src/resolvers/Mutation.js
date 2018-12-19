@@ -189,7 +189,7 @@ const Mutations = {
         id: ctx.request.userId,
       },
     },
-    
+    info
     );
     // Check if they have permissions to do this
     hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE']
