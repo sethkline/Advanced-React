@@ -20,6 +20,7 @@ const Nav = () => (
                             <a>Orders</a>
                             </Link>
                             <Signout />
+                            <button>My Cart</button>
                             </>
                             )}
 
@@ -28,9 +29,6 @@ const Nav = () => (
                             <Link href="/signup">
                             <a>Signup</a>
                             </Link>
-                            <Link href="/me">
-                            <a>Sign In</a>
-                             </Link>
                              </>
                         )}
                     

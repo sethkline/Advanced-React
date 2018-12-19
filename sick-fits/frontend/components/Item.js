@@ -38,9 +38,9 @@ export default class Item extends Component {
             href={{
                 pathname: 'update',
                 query: { id: item.id },
-            }}>
-            
-            <a>Edit </a> 
+            }}
+            >
+            <a>Edit ✏️</a> 
             </Link>
             <button>Add To Cart</button>
             <DeleteItem id={item.id}>Delete This Item</DeleteItem>

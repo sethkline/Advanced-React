@@ -6,4 +6,4 @@ const Sell = ({ query }) => (
     </div>
 );
 
-export default UpdateItem;
+export default Sell;
