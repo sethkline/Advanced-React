@@ -24,6 +24,7 @@ function createClient({ headers }) {
               query: LOCAL_STATE_QUERY,
             });
             // Write the cart State to the opposite
+            console.log('with Data')
             const data = {
               data: { cartOpen: !cartOpen },
             };
@@ -33,7 +34,7 @@ function createClient({ headers }) {
         },
       },
       defaults: {
-        cartOpen: false,
+        cartOpen: true,
       },
     },
   });

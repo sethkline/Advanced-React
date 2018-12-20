@@ -1,15 +1,11 @@
 import React from 'react';
 import { Query , Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { adopt } from 'react-adopt';
-import User from './User';
 import SickButton from './styles/SickButton';
 import CartStyles from './styles/CartStyles';
 import Supreme from './styles/Supreme';
 import CloseButton from './styles/CloseButton';
-import calcTotalPrice from '../lib/calcTotalPrice';
-import formatMoney from '../lib/formatMoney';
-// import TakeMyMoney from './TakeMyMoney';
+
 
 
 const LOCAL_STATE_QUERY = gql`
@@ -25,12 +21,18 @@ const TOGGLE_CART_MUTATION = gql`
 `;
 
 const Cart = () => (
-    <Mutation mutation={TOGGLE_CART_MUTATION}>{(toggleCart) => (
+    <Mutation mutation={TOGGLE_CART_MUTATION}>
+    {toggleCart => (
         <Query query={LOCAL_STATE_QUERY}>
-    {({ data }) =>  (
+    {({ data }) => (
         <CartStyles open={data.cartOpen}>
         <header>
-            <CloseButton onclick={toggleCart} title="close">&times;</CloseButton>
+            <CloseButton 
+                onClick={toggleCart} 
+                title="close"
+                >
+                &times;
+            </CloseButton>
             <Supreme>Your Cart</Supreme>
             <p>You Have ___ Items in your cart</p>
         </header>
