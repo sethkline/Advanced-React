@@ -260,7 +260,8 @@ const Mutations = {
           where:{
             id: args.id,
           },
-        }, `{id, user { id }}` 
+        }, 
+        `{id, user { id }}` 
         );
     // 1.5 Make sure we found an item
         if(!cartItem) throw new Error('No Cart Item Found!')
@@ -269,13 +270,13 @@ const Mutations = {
       throw new Error('Cheatin huhhh')
     }
     // 3. Delete that cart item
-    return ctx.db.mutation.deleteCartItem({
+    return ctx.db.mutation.deleteCartItem(
+      {
       where: { id: args.id }, 
     }, 
     info
     );
   },
-
   };
   
   module.exports = Mutations;
