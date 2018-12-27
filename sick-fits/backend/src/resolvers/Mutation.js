@@ -8,7 +8,6 @@ const stripe = require('../stripe');
 
 const Mutations = {
     async createItem(parent, args, ctx, info) {
-      // TODO: Check if they are logged in
       if(!ctx.request.userId) {
         throw new Error('You must be logged in to do that!')
       }
@@ -334,7 +333,33 @@ const Mutations = {
   });
     //7. Return the Order to the client
     return order;
-  }
+  },
+
+  async createGraphic(parent, args, ctx, info) {
+    if(!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!')
+    }
+
+    const graphic = await ctx.db.mutation.createGraphic(
+      {
+        data: {
+          //This is how to show relationship between item and user
+          user: {
+            connect: {
+              id: ctx.request.userId,
+            },
+          },
+          ...args,
+        },
+      },
+      info
+    );
+
+    console.log(graphic);
+
+    return graphic;
+  },
+
   };
   
   module.exports = Mutations;

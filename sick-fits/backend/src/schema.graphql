@@ -39,6 +39,17 @@ type Mutation {
   removeFromCart(id: ID!): CartItem
 
   createOrder(token: String!): Order!
+
+  createGraphic(
+    number: Int!,
+    lastName: String,
+    firstName: String,
+    organization: String,
+    title: String,
+    category: String,
+    image: String
+    leader: Boolean
+  ): Graphic!
 }
 
 type Query {

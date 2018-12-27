@@ -57,3 +57,175 @@ type Order {
   createdAt: DateTime!
   updatedAt: DateTime!
 }
+
+type Graphic {
+  id: ID! @unique
+  number: Int! @unique
+  lastName: String
+  firstName: String
+  organization: String
+  title: String
+  category: String
+  image: String
+  leader: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Feed {
+  id: ID! @unique
+  startTime: DateTime!
+  eventName: String!
+  organization: String!
+  location: String!
+  source: String!
+  streamChannel: Int
+  liveOnPCN: Boolean
+  pointPerson: String
+  status: String
+  fiber: String
+  booth: String
+  length: Int
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Sponsor {
+  id: ID! @unique
+  title: String!
+  agency: String
+  duration: Int
+  show: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+}
+
+type Promo {
+  id: ID! @unique
+  title: String!
+  agency: String
+  duration: Int
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+#OEC Start
+type contract {
+  id: ID! @unique
+  contractInfo:[ContractInfo]
+  webOTT: [WebOTT]
+  duplication:[Duplication]
+  social: [Social]
+  production: [Production]
+  billboard: [Billboard]
+  promotions: [Promotions]
+  paidSpots:[PaidSpot]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+}
+
+type ContractInfo {
+  soldByPerson: String
+  typeOfClient: String
+  clientCompanyName: String
+  clientPersonName: String
+  clientPersonTitle: String
+  clientPhone: String
+  clientEmail: String
+  productionCompany: String
+  productionCompanyPerson: String
+  productionCompanyPersonTitle: String
+  productionCompanyPhone: String
+  productionCompanyEmail: String
+  copyright: String
+  contractSignDate: String
+  contractStartDate: String
+  contractEndDate: String
+  airDatesTimes: String
+  contractAdditionalInfo: String
+}
+
+type WebOTT{
+  payWall: String
+  webCategory: String
+  selectVideoOnDemand: String
+  otherVideoOnDemand: String
+  webGraphicRequired: String
+  webProgramDescription: String
+  webButton: String
+}
+
+type Duplication{
+  persmissionToSell: String
+  placeInStore: String
+  compSelection: String
+  compFormat: String
+  fTPInstructions: String
+  compDueDate: String
+  compNumbersPerEpisode: String
+  compGraphicDesign: String
+  compAdditionalInfo: String
+}
+
+type Social{
+    socialMediaPermission: String
+    fullFacebookVideo: String
+    socialMediaStartDate: String
+    socialMediaEndDate: String
+    socialFrequency: String
+    socialAdditionalInfo: String
+}
+
+type Production{
+    productionLocation: String
+    productionNameOfShow: String
+    productionLengthOfProgram: String
+    productionProducer: String
+    productionMethodToRecieve: String
+    productionHighlight: String
+    productionAdditionalInfo: String
+}
+
+type Billboard{
+    billboardNewExisting: String
+    billboardGraphics: String
+    billboardScript: String
+    billboardLength: String
+    billboardNameServer: String
+    billboardAirSchedule: String
+    billboardAirProgram: String
+    billboardNumberOfAirings: String
+    billboardNumberOfBillboards: String
+    billboardDueDate: String
+}
+
+type Promotions{
+    promotionsOrgination: String
+    promotionsRunOfSchedule: String
+    promotionsTimesPerDay: String
+    promotionsAirDuringSpecificPrograms: String
+    promotionsTimesPerProgram: String
+    promotinsAirDatesStart: String
+    promotionsAirDatesEnd: String
+    promotionsGraphics: String
+    promotionsMethodToRecieve: String
+    promotionsSocialMediaPermission: String
+    promotionsApproval: String
+    promotionsApprovalDate: String
+}
+
+type PaidSpot{
+    paidSpotPermission: String
+    numberOfDifferentSpots: String
+    totalNumberOfAirings: String
+    nameSavedInServer: String
+    timeSavedInServer: String
+    numberOfAiring: String
+    paidSpotPlacements: String
+    paidSpotDuplicationPermission: String
+    paidSpotMethodToRecieve: String
+    paidSpotApprovedBy: String
+    paidSpotApprovedDate: String  
+}
