@@ -70,6 +70,8 @@ type Query {
   graphic(where: GraphicWhereUniqueInput!): Graphic
 
   graphics(where: GraphicWhereInput, orderBy: GraphicOrderByInput, skip: Int, first: Int): [Graphic]!
+
+  graphicsConnection(where: GraphicWhereInput): GraphicConnection!
 }
 
 type User  {

@@ -15,7 +15,23 @@ class Graphic extends Component {
         const { graphic } = this.props;
         return( 
         <ItemStyles>
-            <p>{graphic.number} {graphic.firstName}</p>
+            {graphic.image && <img src={graphic.image} alt={graphic.lastName} />}
+            <Title>
+            <Link href=
+                {{
+                    pathname: '/graphic',
+                    query: {id: graphic.id}
+                }}>
+                <a>
+                    {graphic.number}
+                </a>
+                </Link>
+                <p>{graphic.firstName} {graphic.lastName}</p>
+                <p>{graphic.organization}</p>
+                <p>{graphic.title}</p>
+
+
+            </Title>
 
             {/* number: $number
             lastName: $lastName

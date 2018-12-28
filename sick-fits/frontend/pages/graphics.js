@@ -3,7 +3,7 @@ import GraphicsList from '../components/graphics/GraphicsList';
 const graphicsPage = props => (
     <div>
 
-        <GraphicsList />
+        <GraphicsList page={parseFloat(props.query.page) || 1} />
 
     </div>
 );

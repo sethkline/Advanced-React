@@ -12,6 +12,9 @@ const Nav = () => (
     <User>
             {({data: { me } }) => (
                 <NavStyles>
+                    <Link href="/graphics">
+                        <a>Graphics</a>
+                        </Link>
                     <Link href="/items">
                         <a>Shop</a>
                         </Link>

@@ -3,8 +3,9 @@ import {Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Graphic from '../Graphic';
-import Pagination from '../Pagination';
+import GraphicsPagination from './GraphicsPagination';
 import { perPage } from '../../config';
+import GraphicsSearch from './GraphicsSearch';
 
 
 const ALL_GRAPHICS_QUERY = gql`
@@ -40,8 +41,12 @@ const GraphicsListStyle = styled.div`
 class GraphicsList extends Component {
     render() {
         return (
+            <>
+            <div className="sub-bar">
+            <GraphicsSearch />
+            </div>
             <Center>
-                <Pagination page={this.props.page} />
+                <GraphicsPagination page={this.props.page} />
                 <Query query={ALL_GRAPHICS_QUERY}
                     variables = {{ 
                         skip: this.props.page * perPage - perPage
@@ -55,8 +60,9 @@ class GraphicsList extends Component {
                     </GraphicsListStyle>
                 }}
                 </Query>
-                <Pagination page={this.props.page} />
+                <GraphicsPagination page={this.props.page} />
             </Center>
+            </>
         );
     }
 }
