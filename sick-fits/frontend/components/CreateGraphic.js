@@ -10,14 +10,14 @@ const CREATE_GRAPHIC_MUTATION = gql `
     mutation CREATE_GRAPHIC_MUTATION(
             $number: Int!
             $lastName: String!
-            $firstName: Int!
+            $firstName: String!
             $organization: String
             $title: String
             $category: String
             $image: String
             $leader: Boolean
     ) {
-        CREATE_GRAPHIC_MUTATION(
+        createGraphic(
             number: $number
             lastName: $lastName
             firstName: $firstName
@@ -31,8 +31,8 @@ const CREATE_GRAPHIC_MUTATION = gql `
         }
     }
 `;
-
-const  categoriesOptions = [ 'Generic', 'PA Senate', 'PA House', 'Federal'];
+//TODO Move to database
+const  categoriesOptions = [ '','Generic', 'PA Senate', 'PA House', 'Federal'];
 
 
 class CreateGraphic extends Component {
@@ -43,9 +43,8 @@ class CreateGraphic extends Component {
         organization: '',
         title: '',
         category: '',
-        image: '',
-        leader: '',
-        value:''
+        image: 'test.jpg',
+        leader: false,
     };
 
 
@@ -54,6 +53,12 @@ class CreateGraphic extends Component {
         const val = type === 'number' ? parseFloat(value) : value;
         this.setState({ [name]: val })
     };
+
+    handleCheckBox = (e) => {
+        this.setState({
+            leader: e.target.checked
+        })
+    }
 
     uploadFile = async (e) => {
         const files = e.target.files;
@@ -84,11 +89,11 @@ class CreateGraphic extends Component {
             // Stop the form from submitting
         e.preventDefault();
         // call the mutation
-        const res = await createItem();
+        const res = await createGraphic();
         //change them to the single item page
         Router.push({
             pathname: '/graphic',
-            query: { id: res.data.createItem.id }
+            query: { id: res.data.createGraphic.id }
         })
     }}
     >
@@ -119,15 +124,10 @@ class CreateGraphic extends Component {
             <label 
             htmlFor="category">
                 Category
-            <input 
-                type="dropdown" 
-                id="text" 
-                name="category" 
-                placeholder="Category" required 
-                value={this.state.category}
-                onChange={this.handleChange}
-                />
-            </label>
+                <select name="category" value={this.state.category} onChange={this.handleChange} required>
+            {categoriesOptions.map((category, i) => <option key={i}>{category}</option>)}
+          </select>
+          </label>
 
             <label
                 htmlFor="number">
@@ -141,17 +141,6 @@ class CreateGraphic extends Component {
                     onChange={this.handleChange}
                     />
                 </label>
-
-                <label>
-                Pick your favorite flavor:
-          <select name="value" value={this.state.value} onChange={this.handleChange}>
-                <option value=""></option>
-                <option value="grapefruit">Grapefruit</option>
-                <option value="lime">Lime</option>
-                <option value="coconut">Coconut</option>
-                <option value="mango">Mango</option>
-          </select>
-        </label>
 
                 <label 
                 htmlFor="lastName">
@@ -174,7 +163,7 @@ class CreateGraphic extends Component {
                     type="text" 
                     id="firstName" 
                     name="firstName" 
-                    placeholder="First Name" required 
+                    placeholder="First Name" 
                     value={this.state.firstName}
                     onChange={this.handleChange}
                     />
@@ -187,7 +176,7 @@ class CreateGraphic extends Component {
                     type="text" 
                     id="organization" 
                     name="organization" 
-                    placeholder="Organization" required 
+                    placeholder="Organization" 
                     value={this.state.organization}
                     onChange={this.handleChange}
                     />
@@ -200,7 +189,7 @@ class CreateGraphic extends Component {
                     type="text" 
                     id="title" 
                     name="title" 
-                    placeholder="Title" required 
+                    placeholder="Title" 
                     value={this.state.title}
                     onChange={this.handleChange}
                     />
@@ -208,57 +197,32 @@ class CreateGraphic extends Component {
 
 
                 <label 
-                htmlFor="title">
-                    Title
-
+                htmlFor="image">
+                    Image
                 <input 
                     type="text" 
-                    id="title" 
-                    name="title" 
-                    placeholder="Title" required 
-                    value={this.state.title}
+                    id="image" 
+                    name="image" 
+                    placeholder="image" 
+                    value={this.state.image}
                     onChange={this.handleChange}
                     />
-
                 </label>
 
                 <label 
-                htmlFor="title">
-                    Title
+                htmlFor="leader">
+                    Leader
                 <input 
-                    type="text" 
-                    id="title" 
-                    name="title" 
-                    placeholder="Title" required 
-                    value={this.state.title}
-                    onChange={this.handleChange}
+                    type="checkbox" 
+                    id="leader" 
+                    name="leader" 
+                    placeholder="Leader" 
+                    value={this.state.leader}
+                    onChange={this.handleCheckBox}
+                    checked={this.state.checked}
                     />
                 </label>
 
-                <label 
-                htmlFor="price">
-                    Price
-                <input 
-                    type="number" 
-                    id="price" 
-                    name="price" 
-                    placeholder="Price" required 
-                    value={this.state.price}
-                    onChange={this.handleChange}
-                    />
-                </label>
-
-                <label 
-                htmlFor="description">
-                    Description
-                <textarea 
-                    id="description" 
-                    name="description" 
-                    placeholder="Enter A Description" required 
-                    value={this.state.description}
-                    onChange={this.handleChange}
-                    />
-                </label>
                 <button type="submit">Submit</button>
 
 

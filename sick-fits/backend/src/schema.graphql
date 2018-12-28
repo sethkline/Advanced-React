@@ -47,7 +47,7 @@ type Mutation {
     organization: String,
     title: String,
     category: String,
-    image: String
+    image: String,
     leader: Boolean
   ): Graphic!
 }
@@ -66,6 +66,10 @@ type Query {
   order(id: ID!): Order
 
   orders(orderBy: OrderOrderByInput): [Order]!
+
+  graphic(where: GraphicWhereUniqueInput!): Graphic
+
+  graphics(where: GraphicWhereInput, orderBy: GraphicOrderByInput, skip: Int, first: Int): [Graphic]!
 }
 
 type User  {

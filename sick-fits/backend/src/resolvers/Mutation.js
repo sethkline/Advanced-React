@@ -26,9 +26,7 @@ const Mutations = {
         },
         info
       );
-  
       console.log(item);
-  
       return item;
     },
 
@@ -344,19 +342,17 @@ const Mutations = {
       {
         data: {
           //This is how to show relationship between item and user
-          user: {
-            connect: {
-              id: ctx.request.userId,
-            },
-          },
+          // user: {
+          //   connect: {
+          //     id: ctx.request.userId,
+          //   },
+          // },
           ...args,
         },
       },
       info
     );
-
     console.log(graphic);
-
     return graphic;
   },
 

@@ -17,6 +17,9 @@ const Nav = () => (
                         </Link>
                         {me && (
                             <>
+                            <Link href="/addgraphic">
+                            <a>+ Graphic</a>
+                            </Link>
                             <Link href="/sell">
                             <a>Sell</a>
                             </Link>

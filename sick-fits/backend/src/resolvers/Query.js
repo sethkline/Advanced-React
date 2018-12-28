@@ -4,6 +4,8 @@ const { hasPermission } = require('../utils')
 const Query = {
   items: forwardTo('db'),
   item: forwardTo('db'),
+  graphic: forwardTo('db'),
+  graphics: forwardTo('db'),
   itemsConnection: forwardTo('db'),
   me(parent, args, ctx, info) {
     // check if there is a current user ID
