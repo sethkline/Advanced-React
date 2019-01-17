@@ -32,8 +32,61 @@ const CREATE_GRAPHIC_MUTATION = gql `
     }
 `;
 //TODO Move to database
-const  categoriesOptions = [ '','Generic', 'PA Senate', 'PA House', 'Federal'];
+const  categoriesOptions = [ 
+            '', 
+            'Bug',
+            'Administration',
+            'Courtesy',
+            'Election',
+            'Federal',
+            'Generic',
+            'Gettysburg',
+            'Judicial',
+            'Locators',
+            'PA House',
+            'PA House Saved',
+            'PA House Staff',
+            'PA Senate',
+            'PA Senate Saved',
+            'People',
+            'Topics',
+];
+// add this to database with ranges
+// categoriesOptions { name: 'PA House', range: 300-599  }
+// find next empty number
+const misingNumInSeqs = [200,21,1,2,3,5,6,9,10,15]
+const numArray = [189459, 189460, 189461, 189463, 189466];
+// find the missing number
+let firstAvailable = numArray.sort
+let nextNumber = misingNumInSeqs.reduce((acc, current, index, array) => {
+  let difference = current - array[index-1];
+  if (difference > 1) {
+    var i = 1;
+    while (i < difference) {
+      acc.push(array[index-1]+i);
+      i++;
+    }
+  }
+  return acc;
+}, []);
+console.log(nextNumber[0])
 
+
+
+// console.log(misingNumInSeq(misingNumInSeqs))
+
+function misingNumInSeq(source, min = 0, max = source.length - 1){
+    if(min >= max){
+        return min + 1;
+    }
+    let pivot = Math.floor((min + max)/2);
+    // problem is in right side. Only look at right sub array
+    if(source[pivot] === pivot + 1){
+        return misingNumInSeq(source, pivot + 1, max);
+    } else {
+        return misingNumInSeq(source, min , pivot);
+    }
+} 
 
 class CreateGraphic extends Component {
     state = {
