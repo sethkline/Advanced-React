@@ -6,6 +6,9 @@ import ItemStyles from './styles/ItemStyles';
 import DeleteItem from './DeleteItem';
 import AddToCart from './AddToCart';
 
+
+
+
 class Graphic extends Component {
     // static propTypes = {
     //   item: PropTypes.object.isRequired,
@@ -14,9 +17,49 @@ class Graphic extends Component {
     render() {
         const { graphic } = this.props;
         return( 
-        <ItemStyles>
-            {graphic.image && <img src={graphic.image} alt={graphic.lastName} />}
-            <Title>
+            <tbody>
+            <tr> 
+            <td> <Link href=
+                {{
+                    pathname: '/graphic',
+                    query: {id: graphic.id}
+                }}>
+                <a>
+                    {graphic.number}
+                </a>
+                </Link>
+            </td>
+            <td> <Link href=
+                {{
+                    pathname: '/graphic',
+                    query: {id: graphic.id}
+                }}>
+                <a>{graphic.firstName} {graphic.lastName}
+                </a>
+                </Link></td>
+            <td> <Link href=
+                {{
+                    pathname: '/graphic',
+                    query: {id: graphic.id}
+                }}>
+                <a>
+            {graphic.organization}
+            </a>
+                </Link>
+            </td>
+            <td><Link href=
+                {{
+                    pathname: '/graphic',
+                    query: {id: graphic.id}
+                }}>
+                <a>
+                {graphic.title} 
+                    </a> 
+                </Link>
+            </td>
+            </tr>
+
+            {/* <Title>
             <Link href=
                 {{
                     pathname: '/graphic',
@@ -31,7 +74,7 @@ class Graphic extends Component {
                 <p>{graphic.title}</p>
 
 
-            </Title>
+            </Title> */}
 
             {/* number: $number
             lastName: $lastName
@@ -68,10 +111,12 @@ class Graphic extends Component {
             <AddToCart id={graphic.id} />
             <DeleteItem id={graphic.id}>Delete This Item</DeleteItem>
             </div> */}
-        </ItemStyles>
-
+            </tbody>
         )
     }
 }
 
 export default Graphic
+
+
+//{graphic.image && <img src={graphic.image} alt={graphic.lastName} />}

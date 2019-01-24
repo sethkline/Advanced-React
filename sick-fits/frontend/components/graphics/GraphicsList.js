@@ -6,6 +6,7 @@ import Graphic from '../Graphic';
 import GraphicsPagination from './GraphicsPagination';
 import { perPage } from '../../config';
 import GraphicsSearch from './GraphicsSearch';
+import Table from '../styles/Table';
 
 
 const ALL_GRAPHICS_QUERY = gql`
@@ -55,9 +56,21 @@ class GraphicsList extends Component {
                 {({ data, error, loading }) => {
                     if(loading) return <p>Loading...</p>
                     if(error) return <p>Error: {error.message}</p>
-                    return <GraphicsListStyle>
-                        {data.graphics.map(graphic => <Graphic graphic={graphic} key={graphic.id}></Graphic>)}
-                    </GraphicsListStyle>
+                    return <div> 
+                        {/* <GraphicsListStyle> */}
+                        <Table>
+                            <tr>
+                                <th>Number</th>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Organization</th>
+                            </tr>
+                            {data.graphics.map(graphic => <Graphic graphic={graphic} key={graphic.id}></Graphic>)}
+            
+                        </Table>
+                        {/* {data.graphics.map(graphic => <Graphic graphic={graphic} key={graphic.id}></Graphic>)} */}
+                    {/* </GraphicsListStyle> */}
+                    </div>
                 }}
                 </Query>
                 <GraphicsPagination page={this.props.page} />

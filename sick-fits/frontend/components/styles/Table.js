@@ -7,6 +7,11 @@ const Table = styled.table`
   thead {
     font-size: 10px;
   }
+
+  a { 
+   display: block; 
+   /* border: 1px solid ${props => props.theme.offWhite}; */
+  }
   td,
   th {
     border-bottom: 1px solid ${props => props.theme.offWhite};
@@ -24,6 +29,9 @@ const Table = styled.table`
       padding: 10px 5px;
       display: block;
     }
+  }
+  th {
+    background: ${props => props.theme.offWhite}
   }
   tr {
     &:hover {
