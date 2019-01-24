@@ -4,6 +4,10 @@ import MessageList from './MessageList'
 import SendMessageForm from './SendMessageForm'
 import RoomList from './RoomList'
 import NewRoomForm from './NewRoomForm'
+import User from '../User';
+
+
+
 
 import { tokenUrl, instanceLocator } from './config'
 
@@ -89,7 +93,7 @@ class Chat extends React.Component {
     
     render() {
         return (
-            <div className="app">
+            <div>
                 <RoomList
                     subscribeToRoom={this.subscribeToRoom}
                     rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
