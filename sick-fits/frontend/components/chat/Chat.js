@@ -4,7 +4,9 @@ import MessageList from './MessageList'
 import SendMessageForm from './SendMessageForm'
 import RoomList from './RoomList'
 import NewRoomForm from './NewRoomForm'
-import User from '../User';
+import { Query } from 'react-apollo';
+import { CURRENT_USER_QUERY } from '../User'
+import Signin from '../Signin';
 
 
 
@@ -19,7 +21,7 @@ class Chat extends React.Component {
             roomId: null,
             messages: [],
             joinableRooms: [],
-            joinedRooms: []
+            joinedRooms: [],
         }
         this.sendMessage = this.sendMessage.bind(this)
         this.subscribeToRoom = this.subscribeToRoom.bind(this)
@@ -28,6 +30,7 @@ class Chat extends React.Component {
     } 
     
     componentDidMount() {
+
         const chatManager = new Chatkit.ChatManager({
             instanceLocator,
             userId: 'skline',
@@ -90,10 +93,42 @@ class Chat extends React.Component {
         .then(room => this.subscribeToRoom(room.id))
         .catch(err => console.log('error with createRoom: ', err))
     }
-    
+
+
     render() {
         return (
             <div>
+                <Query query={CURRENT_USER_QUERY}>
+                {({data, loading}) => {
+                    if(loading) return <p>Loading...</p>
+                    if(!data.me) {
+                        return (
+                        <div> 
+                                <p>Please Sign In before Continuing</p>
+                                
+                                <Signin />
+                        </div>
+                        );
+                    }
+                    return (
+                        <>
+                    <RoomList
+                    subscribeToRoom={this.subscribeToRoom}
+                    rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
+                    roomId={this.state.roomId} />
+                <MessageList 
+                    roomId={this.state.roomId}
+                    messages={this.state.messages} />
+                <SendMessageForm
+                    disabled={!this.state.roomId}
+                    sendMessage={this.sendMessage} />
+                <NewRoomForm createRoom={this.createRoom} />
+                    
+                    <p>{data.me.name}</p>
+                    </>
+                    )
+                } }
+                </Query>
                 <RoomList
                     subscribeToRoom={this.subscribeToRoom}
                     rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
